@@ -1,0 +1,269 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ******************************************************************* */
+/* ***** NAVBAR ***** */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  height: 10vh;
+  align-items: center;
+}
+
+.navbar-title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 10px;
+  color: bisque;
+  font-size: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
+}
+
+
+.logo {
+  font-size: 3rem;
+}
+
+.navbar-title h1 {
+  margin-right: 5px;
+  font-family: monospace;
+  font-size: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.singleLink {
+  list-style-type: none;
+  margin-right: 1rem;
+  font-size: 2em;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  border-radius: 50%;
+  outline: 2px solid bisque;
+  color: bisque;
+  transition: all 0.3s;
+  display: grid;
+  place-items: center;
+}
+
+.singleLink:hover {
+  outline-offset: 3px;
+  transition: all 0.3s;
+  transform: scale(1.10);
+}
+
+.singleLink:hover:first-child {
+  background: #0A66C2;
+}
+
+.singleLink:hover:nth-child(2) {
+  background: #060D23
+}
+
+.singleLink:hover:last-child {
+  background: #e52d27
+}
+
+.hr-line {
+  width: 80%;
+  margin: 0 auto;
+  color: bisque;
+  border: 5px solid bisque;
+  border-radius: 15px;
+}
+
+.hamburger-menu {
+  display: none;
+  color: bisque;
+  margin-right: 7px;
+  cursor: pointer;
+}
+
+/* ******************************************************************** */
+/* ***** HAMBURGER MENU CONTAINER ***** */
+.menu-container {
+  display: none;
+}
+
+.hamburger-rotate {
+  transform: rotate(90deg);
+  transition: all 0.6s
+}
+
+.menu-container .links .singleLink {
+  display: inline-block;
+  list-style-type: none;
+  margin-top: 3rem;
+  padding-left: 7px;
+}
+
+/* ********************************************************************** */
+/* ***** MAIN CONTENT ***** */
+.mainContent {
+  min-height: 89vh;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* ********************************************************************** */
+/* ***** SIDEBAR ******* */
+
+.sidebar {
+  margin-top: 1rem;
+  background-color: #20476d;
+  overflow: hidden;
+  width: 70px;
+  min-height: 100%;
+  transition: width 0.4s;
+  position: relative;
+  border-radius: 0px 10px;
+}
+
+.sidebar-btn {
+  width: 100%;
+  background-color: rgb(74, 112, 146);
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-list {
+  margin-top: 2.5rem;
+  list-style-type: none;
+  display: grid;
+  align-items: center;
+}
+
+.project-list li {
+  color: bisque;
+  height: 4.5rem;
+}
+
+.project-list li:hover {
+  transition: all 0.3s;
+  background-color: #242424;
+}
+
+.project-list li:active {
+  background-color: #242424;
+  box-shadow: 3px 0px 0px 3px bisque;
+}
+
+.project-list li div {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-icon {
+  font-size: 2em;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  outline: 2px solid bisque;
+  color: bisque;
+  transition: all 0.3s;
+  display: grid;
+  place-items: center;
+  padding: 5px;
+  margin: 10px;
+  margin-top: 0.95rem;
+}
+
+.sidebar-list-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 2rem;
+  color: bisque;
+}
+
+.sidebar .activeLink div {
+  background-color: #242424
+}
+
+.sidebar .acitveLink div .sidebar-icon {
+  background-color: #973131;
+  height: 100%
+}
+
+/* ************************************************************************* */
+
+.open {
+  width: 260px;
+}
+
+.grow {
+  flex-grow: 2;
+  text-align: center;
+  padding-top: 1rem;
+  font-size: (1.56rem, 1vw + 1.31rem, 2.11rem);
+}
+
+/* ******************************************************************** */
+
+.intro-container {
+  color: yellowgreen
+}
+
+.virtual-container {
+  color: aquamarine;
+}
+
+.users-container {
+  color: burlywood;
+}
+
+/* *********************************************************************** */
+/* **** MEDIA QUERY ***** */
+@media (max-width : 564px) {
+  .navbar {
+    font-size: 0.75rem;
+  }
+
+  .navbar .links {
+    display: none;
+  }
+
+  .hamburger-menu {
+    display: block;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .menu-container {
+    display: block;
+    position: absolute;
+    top: 10vh;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgb(19, 9, 9);
+    transition: all 0.3s;
+    z-index: 1;
+
+  }
+
+  .menu-container .project-list li div:hover {
+    transition: all 0.3s;
+    background-color: whitesmoke;
+    color: #242424;
+
+    .sidebar-icon {
+      color: #242424;
+      border: 2px solid #242424;
+    }
+  }
+
+}
+
+/* *********************************************************************** */
