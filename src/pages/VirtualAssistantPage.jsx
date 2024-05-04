@@ -1,10 +1,12 @@
 import React from 'react';
+import VirtualAssistant from '../components/VirtualAssistant';
+
 
 const VirutalAssistantPage = () => {
+
   return (
     <div className='virtual-container grow'>
-     <h1>Virtual Assistant</h1>
-     <p>to be continued...</p>
+      <VirtualAssistant />
     </div>
   )
 }
