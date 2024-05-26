@@ -13,10 +13,14 @@ npm install - for node_modules
 
 ###
 
-npm run dev 
+npm run server - db.json
+
+2nd terminal - npm run dev 
 
 ###
 
 host : http://localhost:5173/
+
+db : http://localhost:3001/users
 
 ###

@@ -1,10 +1,10 @@
 import React from 'react';
-import UsersTable from '../components/UsersTable';
+import UsersOutlet from '../components/users/UsersOutlet';
 
 const UsersPage = () => {
   return (
     <div className='users-container grow'>
-      <UsersTable />
+      <UsersOutlet />
     </div>
   )
 }
