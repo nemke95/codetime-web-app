@@ -8,15 +8,14 @@ const UsersSignUp = () => {
   const [job, setJob] = useState( 'Business Analyst')
   const [img, setImg] = useState('');
 
-  const {jobs, gend, addUser} = useGlobalContext()
+  const {jobs, gend, addUser, error, formValidation, submittedForm, setSubmittedForm} = useGlobalContext()
   let boxes = document.querySelectorAll("input[type=checkbox]");
 
-/////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
   const handleImageSelect = (e) => {
     const filerReader = new FileReader()
     filerReader.readAsDataURL(e.target.files[0])
     filerReader.onload = e => {
-        console.log("e.target.result", e.target.result);
         setImg(e.target.result)
     }
   }
@@ -35,7 +34,7 @@ const UsersSignUp = () => {
       boxes.forEach(b => b.checked = false); 
       e.target.checked = state; 
 }
-///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
 
 useEffect( () => {
   boxes.forEach(b => b.addEventListener("change", handleToggleChecked));
@@ -44,43 +43,71 @@ useEffect( () => {
     }
 }, [checked])
 
+useEffect( () => {
+  let timeout = '';
+  if(submittedForm){
+     timeout = setTimeout(()=>{
+      setSubmittedForm(false)
+    }, 3000)
+
+    return () => clearTimeout(timeout);
+  }
+
+}, [submittedForm])
+
+//////////////////////////////////////////////////////////////////////////////////////////
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
-    addUser(username, email, checked, job, img)
-    setUsername('')
-    setEmail('')
-    uncheck()
-    setImg('')
-    setJob('Business Analyst')
+    if(formValidation(username, email, checked, img)){
+      addUser(username, email, checked, job, img)
+      setUsername('')
+      setEmail('')
+      uncheck()
+      setImg('')
+      setJob('Business Analyst')
+      setSubmittedForm(true)
+    }else{
+      console.log('form is not valid');
+    }
   }
 
   return (
     <div>
       <h2>Join Our Community!</h2>
+    {submittedForm ? (
+      <div className='success'>Login succesful!</div>
+    ) : 
       <form className='signup-form'>
         <div>
           <input type='file' className='file-input' accept=".png, .jpg, .jpeg" files={img}  onChange={handleImageSelect}/>
-          {/* {img && <img src={img} className='file-input-img' alt="img" />} */}
+          {error.img && <div className="error">{error.img}</div>}
         </div>
         <div className='input-container'>
           <div>
             <label htmlFor="name">name:</label>
-            <input type="text" className='input-field' id='name' value={username} onChange={e => setUsername(e.target.value)} />
+            <input type="text" className='input-field' id='name' autoComplete='off' value={username} onChange={e => setUsername(e.target.value)} />
+            {error.username && <div className="error">{error.username}</div>}
+            {error.usernameRegex && <div className="error">{error.usernameRegex}</div>}
           </div>
           <div>
             <label htmlFor="email">email:</label>
-            <input type="email" className='input-field' id='email' value={email} onChange={e => setEmail(e.target.value)} />
+            <input type="email" className='input-field' id='email' autoComplete='off' value={email} onChange={e => setEmail(e.target.value)} />
+            {error.email && <div className="error">{error.email}</div>}
+            {error.regex && <div className="error">{error.regex}</div>}
           </div>
         </div>
-        <div className='checkboxes'>
+        <div>
+          <div className='checkboxes'>
                 {gend.map((item, index) => (
                     <div key={index}>
                         <input value={item.text}   className='checkbox' type="checkbox" onChange={handleGenderSelect} />
                         <span>{item.text}</span>
                     </div>
                     ))}
-            </div>
+          </div>
+        {error.checked && <div className="error">{error.checked}</div>}
+        </div>       
         <div className='jobs-container'>
             <label htmlFor="jobs">current position: </label>
             <select name="jobs" id="jobs" value={job} onChange={e => setJob(e.target.value)}>
@@ -91,6 +118,7 @@ useEffect( () => {
         </div>
         <button onClick={handleFormSubmit}>Submit</button>      
       </form>
+}
     </div>
   )
 }
